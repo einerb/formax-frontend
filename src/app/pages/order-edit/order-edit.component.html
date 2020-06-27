@@ -1,0 +1,46 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Editar orden
+      </li>
+    </ol>
+  </nav>
+  
+  <div class="d-flex justify-content-center">
+    <div class="col-xs-12 col-sm-10 col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Editar orden de pedido</h5>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label>Estado</label>
+                <select class="form-control" required autofocus>
+                  <option value="">Seleccione estado</option>
+                  <option value="reservada">Reservada</option>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="transito">En tránsito</option>
+                  <option value="recoger">Listo para recoger</option>
+                  <option value="cerrada">Cerrada</option>
+                  <option value="cancelada">Cancelada</option>
+                </select>
+              </div>
+  
+              <div class="form-group col-md-4">
+                <label>Valor</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <button type="submit" class="btn btn-success ml-auto">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

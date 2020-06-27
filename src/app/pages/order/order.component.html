@@ -1,0 +1,127 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Nueva orden
+    </li>
+  </ol>
+</nav>
+
+<div class="d-flex justify-content-center">
+  <div class="col-xs-12 col-sm-10 col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Registro orden de pedido</h5>
+        <form>
+          <div class="form-group">
+            <label>Canal</label>
+            <input type="text" class="form-control" autofocus />
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <select class="form-control" required>
+              <option value="">Seleccione estado</option>
+              <option value="reservada">Reservada</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="transito">En tránsito</option>
+              <option value="recoger">Listo para recoger</option>
+              <option value="cerrada">Cerrada</option>
+              <option value="cancelada">Cancelada</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>Valor</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Descuento</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Descuento</label>
+              <input type="text" class="form-control" value="2000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Tipo de entrega</label>
+              <select class="form-control" required>
+                <option value="">Seleccione tipo de entrega</option>
+                <option value="estandar">Estándar</option>
+                <option value="express">Express</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Tipo de envío</label>
+              <select class="form-control" required>
+                <option value="">Seleccione tipo de envío</option>
+                <option value="tienda">Entrega en tienda</option>
+                <option value="domicilio">Entrega en domicilio</option>
+              </select>
+            </div>
+          </div>
+          Productos
+          <hr />
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label>SKU</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-3">
+              <label>Nombre</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+              <label>Cantidad</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+              <label>Precio</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+              <label>Cód. barra</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group col-md-1">
+              <button class="btn btn-sm btn-success mt-4">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Código</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      dgfh
+                    </th>
+                    <td>Reservado</td>
+                    <td>$ 200000</td>
+                    <td>Estandar</td>
+                    <td>2020-02-20</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr />
+          <div class="form-row">
+            <button type="submit" class="btn btn-success ml-auto">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

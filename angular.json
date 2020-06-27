@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "formax-frontend"
+    }
+  },
+  "defaultProject": "formax-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
