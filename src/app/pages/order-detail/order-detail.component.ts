@@ -15,6 +15,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class OrderDetailComponent implements OnInit {
   public form: FormGroup;
   public orders;
+  public id;
   public visible = false;
   public showForm = false;
   public submitted = false;
@@ -32,8 +33,8 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
 
-    let id = this.route.snapshot.paramMap.get('id');
-    this.getId(id);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getId(this.id);
   }
 
   get f() {

@@ -15,6 +15,7 @@ export class OrderComponent implements OnInit {
   public form: FormGroup;
   public orders;
   public submitted = false;
+  public id_order;
 
   constructor(
     private orderService: OrderService,
@@ -56,22 +57,22 @@ export class OrderComponent implements OnInit {
     }
 
     this.orderService.createOrder(this.form.value).subscribe(
-      () => {
-        this.onSuccess();
-        this.router.navigate(['home']);
+      (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Enhorabuena',
+          text: 'Registro exitoso!',
+        }).then((result) => {
+          this.id_order = res.data.id;
+          if (result.value) {
+            this.router.navigate(['order-details', this.id_order]);
+          }
+        });
       },
       (err) => {
         this.onFailure(err);
       }
     );
-  }
-
-  private onSuccess() {
-    Swal.fire({
-      icon: 'success',
-      title: 'Enhorabuena',
-      text: 'Registro exitoso!',
-    });
   }
 
   private onFailure(err) {

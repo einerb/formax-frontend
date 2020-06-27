@@ -48,9 +48,9 @@ export class OrderService {
     );
   }
 
-  public updateOrder(data: any) {
+  public updateOrder(id: any, data: any) {
     return this.globalService
-      .put(Constant.Endpoints.ORDER.BASE + '/' + data.id, data)
+      .put(Constant.Endpoints.ORDER.UPDATE + '/' + id + API_KEY, data)
       .pipe(
         map((res) => {
           return res;

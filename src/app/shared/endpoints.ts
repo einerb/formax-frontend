@@ -13,5 +13,6 @@ export const Endpoint = {
     DETAILS: environment.api.base + 'orders',
     PRODUCTSBYORDER: environment.api.base + 'orders/products',
     DELETE: environment.api.base + 'orders/remove',
+    UPDATE: environment.api.base + 'orders/update',
   },
 };

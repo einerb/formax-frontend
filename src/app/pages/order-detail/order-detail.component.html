@@ -19,7 +19,11 @@
   <div class="col-md mb-3">
     <h5>
       Número de orden:
-      <small class="text-muted">{{ orders?.order | uppercase }}</small>
+      <small class="text-muted"
+        >{{ orders?.order | uppercase }}
+        <a *ngIf="orders" [routerLink]="['/order-edit', orders.id]">Editar <i class="fa fa-edit"></i
+          ></a
+        ></small>
     </h5>
   </div>
   <div class="col-md mb-3">
@@ -104,7 +108,10 @@
             <div *ngIf="f.sku.invalid" class="alert alert-danger">
               El SKU es requerido
             </div>
-            <div *ngIf="f.sku.errors?.minlength || f.sku.errors?.maxlength" class="alert alert-danger">
+            <div
+              *ngIf="f.sku.errors?.minlength || f.sku.errors?.maxlength"
+              class="alert alert-danger"
+            >
               El SKU debe contener mínimo 10 y máximo 13 caracteres
             </div>
           </span>

@@ -1,7 +1,8 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FormGroup, NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { OrderService } from 'src/app/services/order.service';
 
@@ -12,15 +13,23 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderEditComponent implements OnInit {
   public orders;
+  public form: FormGroup;
+  public submitted = false;
 
   constructor(
     private orderService: OrderService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.spinner.show();
+
+    this.orders = {
+      state: '',
+      value: '',
+    };
 
     let id = this.route.snapshot.paramMap.get('id');
     this.getId(id);
@@ -33,11 +42,35 @@ export class OrderEditComponent implements OnInit {
     });
   }
 
+  public onUpdate(form: NgForm) {
+    this.orderService
+      .updateOrder(this.route.snapshot.paramMap.get('id'), form.value)
+      .subscribe(
+        () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Enhorabuena',
+            text: 'Registro exitoso!',
+          }).then((result) => {
+            if (result.value) {
+              this.router.navigate([
+                'order-details',
+                this.route.snapshot.paramMap.get('id'),
+              ]);
+            }
+          });
+        },
+        (err) => {
+          this.onFailure(err);
+        }
+      );
+  }
+
   private onSuccess() {
     Swal.fire({
       icon: 'success',
-      title: "Enhorabuena",
-      text: "Registro exitoso!"
+      title: 'Enhorabuena',
+      text: 'Registro exitoso!',
     });
   }
 
