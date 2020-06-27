@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="pacman"
+  [fullScreen]="true"
+  ><p style="color: white;">Cargando...</p></ngx-spinner
+>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
@@ -6,3 +14,200 @@
     </li>
   </ol>
 </nav>
+
+<div class="row mt-4">
+  <div class="col-md mb-3">
+    <h5>
+      Número de orden:
+      <small class="text-muted">{{ orders?.order | uppercase }}</small>
+    </h5>
+  </div>
+  <div class="col-md mb-3">
+    <h5>
+      Canal: <small class="text-muted">{{ orders?.channel | titlecase }}</small>
+    </h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md mb-3">
+    <h5>
+      Estado: <small class="text-muted">{{ orders?.state | titlecase }}</small>
+    </h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md mb-3">
+    <h5>
+      Valor: <small class="text-muted">{{ orders?.value }}</small>
+    </h5>
+  </div>
+  <div class="col-md mb-3">
+    <h5>
+      Descuento aplicado:
+      <small class="text-muted">{{ orders?.discount }}</small>
+    </h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md mb-3">
+    <h5>
+      Tipo de entrega:
+      <small class="text-muted">{{ orders?.delivery | titlecase }}</small>
+    </h5>
+  </div>
+  <div class="col-md mb-3">
+    <h5>
+      Tipo de envío:
+      <small class="text-muted">{{ orders?.dispatch | titlecase }}</small>
+    </h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md mb-5">
+    <h5>
+      Fecha de creación:
+      <small class="text-muted">{{
+        orders?.created_at | date: "medium"
+      }}</small>
+    </h5>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-8 col-md-9">
+      <h4>Productos asociados</h4>
+    </div>
+    <div class="d-none d-sm-block col-sm-4 col-md-3">
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-sm btn-primary" (click)="show()">
+          Nuevo producto
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showForm">
+    <form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label>SKU</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="sku"
+            minlength="10"
+            [ngClass]="{ 'is-invalid': submitted && f.sku.errors }"
+          />
+          <span *ngIf="submitted && f.sku.errors" class="invalid-feedback">
+            <div *ngIf="f.sku.invalid" class="alert alert-danger">
+              El SKU es requerido
+            </div>
+            <div *ngIf="f.sku.errors?.minlength" class="alert alert-danger">
+              El SKU debe contener mínimo 10 caracteres
+            </div>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+          />
+          <span *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.invalid" class="alert alert-danger">
+              El nombre es requerido
+            </div>
+          </span>
+        </div>
+        <div class="form-group col-md-2">
+          <label>Cantidad</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="quantity"
+            [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }"
+          />
+          <span *ngIf="submitted && f.quantity.errors" class="invalid-feedback">
+            <div *ngIf="f.quantity.invalid" class="alert alert-danger">
+              La cantidad es requerida
+            </div>
+          </span>
+        </div>
+        <div class="form-group col-md-2">
+          <label>Precio</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="price"
+            [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+          />
+          <span *ngIf="submitted && f.price.errors" class="invalid-feedback">
+            <div *ngIf="f.price.invalid" class="alert alert-danger">
+              El precio es requerido
+            </div>
+          </span>
+        </div>
+        <div class="form-group col-md-2">
+          <label>Cód. barra</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="bar_code"
+            [ngClass]="{ 'is-invalid': submitted && f.bar_code.errors }"
+          />
+          <span *ngIf="submitted && f.bar_code.errors" class="invalid-feedback">
+            <div *ngIf="f.bar_code.invalid" class="alert alert-danger">
+              El código de barra es requerido
+            </div>
+          </span>
+        </div>
+        <div class="form-group col-md-1">
+          <button
+            type="submit"
+            class="btn btn-sm btn-success"
+            style="margin-top: 35px;"
+          >
+            Guardar <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">SKU</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Código de barra</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orders?.product">
+        <th scope="row">
+          {{ item.sku }}
+        </th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.bar_code }}</td>
+        <td>
+          <a (click)="deleteProduct(item.id)" style="cursor: pointer;"
+            ><i class="fa fa-trash text-danger"></i
+          ></a>
+        </td>
+      </tr>
+      <tr *ngIf="visible">
+        <td colspan="7">No hay productos asociados!</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
