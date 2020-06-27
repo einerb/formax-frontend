@@ -57,4 +57,14 @@ export class OrderService {
         })
       );
   }
+
+  public deleteOrder(id: any) {
+    return this.globalService
+      .delete(Constant.Endpoints.ORDER.DELETE + '/' + id + API_KEY)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 }

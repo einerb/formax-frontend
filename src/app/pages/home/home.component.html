@@ -50,10 +50,12 @@
           ></a>
         </td>
         <td>
-          <a href="" class="text-danger"><i class="fa fa-trash"></i></a>
+          <a (click)="deleteOrder(item.id)" style="cursor: pointer;"
+            ><i class="fa fa-trash text-danger"></i
+          ></a>
         </td>
       </tr>
-      <tr *ngIf=visible>
+      <tr *ngIf="visible">
         <td colspan="7">No hay productos asociados!</td>
       </tr>
     </tbody>

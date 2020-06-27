@@ -97,14 +97,15 @@
             class="form-control"
             formControlName="sku"
             minlength="10"
+            maxlength="13"
             [ngClass]="{ 'is-invalid': submitted && f.sku.errors }"
           />
           <span *ngIf="submitted && f.sku.errors" class="invalid-feedback">
             <div *ngIf="f.sku.invalid" class="alert alert-danger">
               El SKU es requerido
             </div>
-            <div *ngIf="f.sku.errors?.minlength" class="alert alert-danger">
-              El SKU debe contener mínimo 10 caracteres
+            <div *ngIf="f.sku.errors?.minlength || f.sku.errors?.maxlength" class="alert alert-danger">
+              El SKU debe contener mínimo 10 y máximo 13 caracteres
             </div>
           </span>
         </div>

@@ -56,8 +56,10 @@ export class OrderDetailComponent implements OnInit {
       this.orders = res.data[0];
       this.spinner.hide();
 
-      if (this.orders.length > 0) {
+      if (this.orders?.length > 0) {
         this.visible = false;
+      } else {
+        this.visible = true;
       }
     });
   }
