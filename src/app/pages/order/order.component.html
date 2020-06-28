@@ -55,10 +55,7 @@
               <option value="cerrada">Cerrada</option>
               <option value="cancelada">Cancelada</option>
             </select>
-            <span
-              *ngIf="submitted && f.state.errors"
-              class="invalid-feedback"
-            >
+            <span *ngIf="submitted && f.state.errors" class="invalid-feedback">
               <div *ngIf="f.state.invalid" class="alert alert-danger">
                 El estado es requerido
               </div>
@@ -84,12 +81,20 @@
             </div>
             <div class="form-group col-md-4">
               <label>Descuento</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="discount"
-                [ngClass]="{ 'is-invalid': submitted && f.discount.errors }"
-              />
+              <div class="input-group mb-3">
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="discount"
+                  [ngClass]="{ 'is-invalid': submitted && f.discount.errors }"
+                  aria-describedby="basic-addon2"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2"
+                    ><i class="fa fa-percent"></i></span
+                  >
+                </div>
+              </div>
               <span
                 *ngIf="submitted && f.discount.errors"
                 class="invalid-feedback"

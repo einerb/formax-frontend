@@ -63,9 +63,10 @@ export class OrderComponent implements OnInit {
           title: 'Enhorabuena',
           text: 'Registro exitoso!',
         }).then((result) => {
-          this.id_order = res.data.id;
+          this.id_order = res.data;
+          
           if (result.value) {
-            this.router.navigate(['order-details', this.id_order]);
+            this.router.navigate(['order-details', this.id_order.id]);
           }
         });
       },

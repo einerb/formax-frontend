@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-order-details',
@@ -26,15 +27,15 @@ export class OrderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder
-  ) {
-    this.createForm();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
 
     this.id = this.route.snapshot.paramMap.get('id');
     this.getId(this.id);
+
+    this.createForm();
   }
 
   get f() {
@@ -57,7 +58,7 @@ export class OrderDetailComponent implements OnInit {
       this.orders = res.data[0];
       this.spinner.hide();
 
-      if (this.orders?.length > 0) {
+      if (this.orders.product?.length > 0) {
         this.visible = false;
       } else {
         this.visible = true;
@@ -65,8 +66,8 @@ export class OrderDetailComponent implements OnInit {
     });
   }
 
-  public deleteProduct(id: any) {
-    Swal.fire({
+  public async deleteProduct(id: any) {
+    await Swal.fire({
       title: 'Está seguro?',
       text: 'Sí elimina el producto no se podrá recuperar!',
       icon: 'warning',
@@ -82,8 +83,8 @@ export class OrderDetailComponent implements OnInit {
             'El producto fue eliminado exitosamente.',
             'success'
           );
+          this.getId(this.id);
         });
-        this.getId(this.route.snapshot.paramMap.get('id'));
       }
     });
   }
@@ -101,13 +102,13 @@ export class OrderDetailComponent implements OnInit {
       quantity: this.form.get('quantity').value,
       price: this.form.get('price').value,
       bar_code: this.form.get('bar_code').value,
-      order_id: this.route.snapshot.paramMap.get('id'),
+      order_id: this.id,
     };
 
     this.productService.createProduct(data).subscribe(
       () => {
         this.onSuccess();
-        this.getId(this.route.snapshot.paramMap.get('id'));
+        this.getId(this.id);
         this.form.reset();
         this.showForm = false;
       },

@@ -15,6 +15,7 @@ export class OrderEditComponent implements OnInit {
   public orders;
   public form: FormGroup;
   public submitted = false;
+  public id;
 
   constructor(
     private orderService: OrderService,
@@ -31,8 +32,8 @@ export class OrderEditComponent implements OnInit {
       value: '',
     };
 
-    let id = this.route.snapshot.paramMap.get('id');
-    this.getId(id);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getId(this.id);
   }
 
   private getId(id: any) {
@@ -43,27 +44,22 @@ export class OrderEditComponent implements OnInit {
   }
 
   public onUpdate(form: NgForm) {
-    this.orderService
-      .updateOrder(this.route.snapshot.paramMap.get('id'), form.value)
-      .subscribe(
-        () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Enhorabuena',
-            text: 'Registro exitoso!',
-          }).then((result) => {
-            if (result.value) {
-              this.router.navigate([
-                'order-details',
-                this.route.snapshot.paramMap.get('id'),
-              ]);
-            }
-          });
-        },
-        (err) => {
-          this.onFailure(err);
-        }
-      );
+    this.orderService.updateOrder(this.id, form.value).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Enhorabuena',
+          text: 'Registro exitoso!',
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['order-details', this.id]);
+          }
+        });
+      },
+      (err) => {
+        this.onFailure(err);
+      }
+    );
   }
 
   private onSuccess() {
